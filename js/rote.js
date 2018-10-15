@@ -2,29 +2,32 @@ const fs = require('mz/fs')
 const exec = require('./she')
 const sha = require('./sha')
 
-const giwk = async ctx => {
+const gish = async ctx => {
 
-    const resa = sha(ctx.request.body.toString(), 'aaaa')
-    const resb = sha(ctx.request.body.toString(), 'bbbb')
+    await fs.appendFile('./log.txt', '\n\n' + new Date().toLocaleString() + '  收到Webhook')
+
+    const body = JSON.stringify(ctx.request.body, null, 2)
+    console.log(body)
+    const resa = sha(body, 'aaaa')
+    const resb = sha(body, 'bbbb')
 
     const tok = ctx.request.header['x-gogs-signature']
-    console.log(resa + '\n' + resb + '\n' + tok)
 
     if (tok === resa) {
         exec.front()
         ctx.response.body = 'front ok'
-
+        await fs.appendFile('./log.txt', '\n前端开始自动编译...')
+        
     } else if (tok === resb) {
         exec.back()
         ctx.response.body = 'back ok'
+        await fs.appendFile('./log.txt', '\n后端开始自动部署...')
 
     } else {
         ctx.response.body = 'ignore'
+        await fs.appendFile('./log.txt', '\n忽略请求...')
     }
-
-    const out = JSON.stringify(ctx.request.body, null, 2)
-    await fs.writeFile('./log.txt', out)
 
 };
 
-module.exports = giwk
+module.exports = gish
