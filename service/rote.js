@@ -1,6 +1,6 @@
 const fs = require('mz/fs')
-const exec = require('./she')
-const sha = require('./sha')
+const exec = require('./shell')
+const sha = require('../utils/sha')
 
 const gish = async ctx => {
 
