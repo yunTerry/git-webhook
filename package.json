@@ -1,17 +1,17 @@
 {
-  "name": "koa-de",
+  "name": "gogs-webhook",
   "version": "1.0.0",
-  "description": "",
+  "description": "git webhook service for gogs",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "pm2 start app.js --name=node-shell"
   },
-  "author": "terry",
+  "author": "Terry",
   "license": "ISC",
   "dependencies": {
     "koa": "^2.5.3",
     "koa-body": "^4.0.4",
     "koa-route": "^3.2.0",
-    "mz": "^2.7.0"
+    "log4js": "^3.0.6"
   }
 }
