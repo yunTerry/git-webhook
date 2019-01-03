@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const koaBody = require('koa-body');
 const route = require('koa-route');
-const main = require('./js/rote');
+const main = require('./service/rote');
 
 const app = new Koa();
 
